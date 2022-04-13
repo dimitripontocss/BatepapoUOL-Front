@@ -12,21 +12,23 @@
 
     <div class="barraTopo">
         <div><img src="imagens/logo 1.png" alt=""></div>
-        <div><ion-icon name="people"></ion-icon></div>
+        <div onclick="sidebar()"><ion-icon name="people"></ion-icon></div>
     </div>
 
-
-    <div class="chat">
-        <div class="controle"></div>
-        <div class="publico"></div>
-        <div class="privado"></div>
     
+    <div class="sidebar escondido">
+        <div class="voltar" onclick="esconde()"></div>
+        <div class="funcional">
+            
+        </div>
     </div>
+
+    <div class="chat"></div>
 
 
     <div class="barraChat">
-        <input class = "input-chat" type="text" placeholder="Escreva aqui...">
-        <div class="enviar"><ion-icon name="paper-plane-outline"></ion-icon></div>
+        <input class = "inputChat" type="text" placeholder="Escreva aqui...">
+        <div class="enviar" onclick="enviarMSG()"><ion-icon name="paper-plane-outline"></ion-icon></div>
     </div>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

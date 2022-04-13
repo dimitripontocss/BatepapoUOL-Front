@@ -52,19 +52,26 @@ body{
     margin-top: 5px;
     border-radius: 10px;
     word-wrap: break-word;
+    display: flex;
+    align-items: center;
 }
 
-.controle{
+.status{
     background-color: #DCDCDC;    
 }
 
-.publico{
+.message{
     background-color: #FFFFFF;   
 
 }
 
-.privado{
+.private_message{
     background-color: #FFDEDE;    
+}
+
+.hora{
+    margin-right: 8px;
+    color: rgba(0, 0, 0, 0.3);
 }
 
 .barraChat{
@@ -85,10 +92,10 @@ body{
     font-size: 32px;
 }
 
-.input-chat{
+.inputChat{
     border: 0;
     height: 50px;
-    width: 200px;   
+    width: 500px;   
     font-size: 18px;
     font-weight: 400;
     color: #000000;
@@ -100,4 +107,31 @@ body{
     font-style: italic;
     font-weight: 400;
     color: #000000;
+}
+
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    display: flex;
+}
+
+.sidebar.escondido{
+    display: none;
+}
+
+.voltar{
+    width: 40%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.funcional{
+    width: 60%;
+    height: 100%;
+    background-color: #ffffff;
 }
