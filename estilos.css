@@ -32,6 +32,40 @@ body{
     font-size: 46px;
 }
 
+.chat{
+    width: 100%;
+    position: absolute;
+    top: 110px;
+    bottom: 100px;
+    left: 0;
+    overflow-y: scroll;
+
+}
+
+.chat::-webkit-scrollbar {
+   display: none;              
+}
+
+.chat > div{
+    width: 100%;
+    min-height: 50px;
+    margin-top: 5px;
+    border-radius: 10px;
+    word-wrap: break-word;
+}
+
+.controle{
+    background-color: #DCDCDC;    
+}
+
+.publico{
+    background-color: #FFFFFF;   
+
+}
+
+.privado{
+    background-color: #FFDEDE;    
+}
 
 .barraChat{
     width: 100%;
