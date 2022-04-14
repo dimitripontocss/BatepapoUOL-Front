@@ -23,8 +23,10 @@
             <div class="ativos"></div>
             <p>Escolha a visibilidade:</p>
             <div class="tipoMSG">
-                <div onclick="qualTipo(this)"><ion-icon name="lock-open"></ion-icon> <span>Público</span></div>
-                <div onclick="qualTipo(this)"><ion-icon name="lock-closed"></ion-icon> <span>Reservadamente</span></div>
+                <div onclick="qualTipo(this)"> <div><ion-icon name="lock-open"></ion-icon><span>Público</span></div> 
+                <div class="ion"><ion-icon name="checkmark"></ion-icon></div></div>
+                <div onclick="qualTipo(this)"> <div><ion-icon name="lock-closed"></ion-icon><span>Reservadamente</span></div>
+                <div class="ion"><ion-icon name="checkmark"></ion-icon></div></div>
             </div>
         </div>
     </div>
@@ -33,8 +35,17 @@
 
 
     <div class="barraChat">
-        <input class = "inputChat" type="text" placeholder="Escreva aqui...">
+        <div><input class = "inputChat" type="text" placeholder="Escreva aqui...">
+            <p class="subTXT"></p>
+        </div>
         <div class="enviar" onclick="enviarMSG()"><ion-icon name="paper-plane-outline"></ion-icon></div>
+    </div>
+
+
+    <div class="teladeentrada">
+        <div><img src="imagens/logo 1.png" alt=""></div>
+        <div><input class="inputNome" type="text" placeholder="Digite seu nome"></div>
+        <button onclick="entrar()">Entrar</button>
     </div>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

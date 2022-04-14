@@ -1,20 +1,31 @@
 let nome;
 let destinatario = "Todos";
 let tipoMSG = "message";
+let tipoSubtexto = "Público";
+let msg;
+
 
 function entrar(){
-    nome = prompt("Qual seu nome?");
+    nome = document.querySelector(".inputNome").value;
     const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', {name: nome});
-    promise.catch(entrar);
-    promise.then(capturaMSG);
+    promise.catch(erro);
+    promise.then(revelaTudo);
+    setInterval(function(){
+        axios.post('https://mock-api.driven.com.br/api/v6/uol/status',{name: nome})
+    }, 4000);
 }
 
-entrar();
+function erro(){
+    alert("Usuario já escolhido por favor selecione outro!");
+    document.querySelector(".inputNome").value = "";
+}
 
-setInterval(function(){
-    axios.post('https://mock-api.driven.com.br/api/v6/uol/status',{name: nome})
-}, 4000);
 
+function revelaTudo(){
+    const auxiliar = document.querySelector(".teladeentrada").classList;
+    auxiliar.add("escondido"); 
+    capturaMSG();
+}
 
 
 
@@ -22,6 +33,10 @@ function capturaMSG(){
     const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     promise.then(renderizarMSG);
 }
+
+
+setInterval(capturaMSG, 3000);
+
 
 function renderizarMSG(elemento){
     const auxiliar = elemento.data;
@@ -48,7 +63,7 @@ function renderizarMSG(elemento){
 
     
 
-setInterval(capturaMSG, 3000);
+
 
 
 
@@ -64,41 +79,61 @@ function inserirAtivos(elemento){
     const auxiliar = elemento.data;
     const aux = document.querySelector(".ativos");
     aux.innerHTML = "";
-    aux.innerHTML = `<div onclick="destino(this)"><ion-icon name="people"></ion-icon> <span>Todos</span></div>`;
+    aux.innerHTML = `<div onclick="destino(this)"> <div><ion-icon name="people"></ion-icon><span>Todos</span></div> 
+    <div class="ion"><ion-icon name="checkmark"></ion-icon></div> </div>`;
     for(let i = 0; i<auxiliar.length; i++){
         aux.innerHTML += `
-        <div onclick="destino(this)"><ion-icon name="people"></ion-icon> <span>${auxiliar[i].name}</span></div>
+        <div onclick="destino(this)"> <div><ion-icon name="people"></ion-icon><span>${auxiliar[i].name}</span></div> 
+        <div class="ion"><ion-icon name="checkmark"></ion-icon></div> </div>
         `
     }
 }
 
 setInterval(buscaAtivos, 10000);
 
-function  ativaSubtxt(){
+function  selecionaDestino(elemento){
+    const destinoSelecionado = document.querySelector(".ativos .selecionado");
+    if (destinoSelecionado !== null) {
+        destinoSelecionado.classList.remove("selecionado");
+      }
+      elemento.classList.add("selecionado");
+}
+
+function selecionaTipo(elemento){
+    const tipoSelecionado = document.querySelector(".tipoMSG .selecionado");
+    if (tipoSelecionado !== null) {
+        tipoSelecionado.classList.remove("selecionado");
+      }
+      elemento.classList.add("selecionado");
 
 }
 
+
 function destino(elemento){
     destinatario =  elemento.innerText;
-    console.log(destinatario);
-    ativaSubtxt();
+    selecionaDestino(elemento);
+    subTxt();
 }
 
 function qualTipo(elemento){
     const auxiliar = elemento.innerText;
-    console.log(tipoMSG);
+    tipoSubtexto = auxiliar;
     if(auxiliar == "Reservadamente"){
         tipoMSG = "private_message";
     }else{
         tipoMSG = "message";
     }
-    console.log(tipoMSG);
+    selecionaTipo(elemento);
+    subTxt();
 }
 
+function subTxt(){
+    const auxiliar = document.querySelector(".subTXT");
+    auxiliar.innerHTML = `Enviando para ${destinatario} (${tipoSubtexto})`;
+}
 
 function enviarMSG(){
-    let msg = document.querySelector(".inputChat").value;
-    console.log(msg);
+    msg = document.querySelector(".inputChat").value;
     let mensagem = {
         from: nome,
 	    to: destinatario,
@@ -106,8 +141,6 @@ function enviarMSG(){
 	    type: tipoMSG
     }
     document.querySelector(".inputChat").value = "";
-    console.log(msg);
-    console.log(mensagem);
     const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', mensagem);
     promise.then(enviou);
     promise.catch(deuruim);
@@ -115,7 +148,6 @@ function enviarMSG(){
 }
 
 function enviou(){
-    
     capturaMSG();
 }
 
@@ -126,9 +158,23 @@ function deuruim(){
 function sidebar(){
     const aux = document.querySelector(".sidebar").classList;
     aux.remove("escondido");
+    subTxt();
 }
 
 function esconde(){
     const aux = document.querySelector(".sidebar").classList;
     aux.add("escondido");
 }
+
+function verificaenter(event){
+    msg = document.querySelector(".inputChat").value;
+    if (event.code == "Enter" && msg !== undefined ){
+        enviarMSG();
+    }
+    else{
+        return;
+    }
+}
+
+const sendMSG = document.querySelector(".enviar");
+document.addEventListener('keypress', verificaenter)
