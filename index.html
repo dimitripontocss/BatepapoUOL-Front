@@ -19,7 +19,13 @@
     <div class="sidebar escondido">
         <div class="voltar" onclick="esconde()"></div>
         <div class="funcional">
-            
+            <p>Escolha um contato para enviar mensagem:</p>
+            <div class="ativos"></div>
+            <p>Escolha a visibilidade:</p>
+            <div class="tipoMSG">
+                <div onclick="qualTipo(this)"><ion-icon name="lock-open"></ion-icon> <span>Público</span></div>
+                <div onclick="qualTipo(this)"><ion-icon name="lock-closed"></ion-icon> <span>Reservadamente</span></div>
+            </div>
         </div>
     </div>
 
