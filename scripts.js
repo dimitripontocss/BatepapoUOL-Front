@@ -168,11 +168,8 @@ function esconde(){
 
 function verificaenter(event){
     msg = document.querySelector(".inputChat").value;
-    if (event.code == "Enter" && msg !== undefined ){
+    if (event.code == "Enter" && msg !== "" ){
         enviarMSG();
-    }
-    else{
-        return;
     }
 }
 
